@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FiHome, FiInfo, FiPhone } from "react-icons/fi"; // Import icons from react-icons
+import Image from "../assets/fonts/PayFlex.svg";
 
 const SideBar = () => {
   // Define an array of menu items with their respective icons
@@ -26,7 +27,6 @@ const SideBar = () => {
     marginLeft: 15,
     marginRight: 15,
     margin: 10,
-    
   };
 
   const handleItemClick = (index) => {
@@ -35,9 +35,18 @@ const SideBar = () => {
 
   return (
     <div style={{ backgroundColor: "#fff" }}>
-      Proximate [LOGO]
-  
-      <div style={{ marginTop: 50 }}>
+      <img
+        src={Image}
+        alt="Logo"
+        style={{
+          height: 80,
+          display: "block",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      />
+
+      <div style={{ marginTop: 0 }}>
         {/* Render menu items dynamically */}
         {menuItems.map((menuItem, index) => (
           <div
@@ -45,8 +54,9 @@ const SideBar = () => {
             style={{
               ...menuItemStyle,
               fontWeight: selectedItem === index ? "normal" : "normal",
-              backgroundColor: selectedItem === index ? "#e9f2ff" : "transparent",
-              color: selectedItem === index ? "#0c66e4" : "#44546f"
+              backgroundColor:
+                selectedItem === index ? "#e9f2ff" : "transparent",
+              color: selectedItem === index ? "#0c66e4" : "#44546f",
             }}
             onMouseEnter={() => {
               if (selectedItem !== index) {
@@ -64,8 +74,15 @@ const SideBar = () => {
             }}
             onClick={() => handleItemClick(index)}
           >
-            <menuItem.icon style={{ marginRight: "10px", fontSize: "20px", color: selectedItem === index ? "#0c66e4" : "#44546f" }} /> {/* Initial icon color */}
-            <div style={{ fontSize: '17px',fontFamily:'DMM'}}>
+            <menuItem.icon
+              style={{
+                marginRight: "10px",
+                fontSize: "20px",
+                color: selectedItem === index ? "#0c66e4" : "#44546f",
+              }}
+            />{" "}
+            {/* Initial icon color */}
+            <div style={{ fontSize: "17px", fontFamily: "DMM" }}>
               {menuItem.text}
             </div>
           </div>
