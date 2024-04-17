@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../Firebase';
 import { collection, getDocs } from 'firebase/firestore';
 
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+
 const Test = () => {
   const [names, setNames] = useState([]);
 
@@ -34,6 +37,12 @@ const Test = () => {
           <li key={index}>{name}</li>
         ))}
       </ul>
+
+      <Stack direction="row" spacing={2}>
+      <Avatar alt="Remy Sharp" src="https://mui.com/static/images/avatar/1.jpg" />
+      <Avatar alt="Travis Howard" src="https://mui.com/static/images/avatar/2.jpg" />
+      <Avatar alt="Cindy Baker" src="https://mui.com/static/images/avatar/3.jpg" />
+    </Stack>
     </div>
   );
 };

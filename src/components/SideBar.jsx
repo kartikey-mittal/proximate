@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import { FiHome, FiInfo, FiPhone } from "react-icons/fi"; // Import icons from react-icons
+import { Link, useLocation } from "react-router-dom";
+import { FiHome, FiInfo, FiPhone,  } from "react-icons/fi"; // Import icons from react-icons
+import { FaFolderOpen} from "react-icons/fa6"; // Import icons from react-icons
 import Image from "../assets/fonts/PayFlex.svg";
 
 const SideBar = () => {
-  // Define an array of menu items with their respective icons
+  // Define an array of menu items with their respective icons and paths
   const menuItems = [
-    { text: "Dashboard", icon: FiHome },
-    { text: "About", icon: FiInfo },
-    { text: "Connect", icon: FiPhone },
+    { text: "Dashboard", icon: FiHome, path: "/" },
+    { text: "About", icon: FiInfo, path: "/about" },
+    { text: "Connect", icon: FiPhone, path: "/connect" },
+    { text: "Projects", icon: FaFolderOpen, path: "/projects" },
     // Add more menu items as needed
   ];
 
   const [selectedItem, setSelectedItem] = useState(0); // Default selected item is Home
-
+console.log(selectedItem)
   const menuItemStyle = {
     padding: "10px 10px",
     cursor: "pointer",
@@ -33,8 +36,11 @@ const SideBar = () => {
     setSelectedItem(index);
   };
 
+  // Get current path from React Router
+  const location = useLocation();
+
   return (
-    <div style={{ backgroundColor: "#fff" }}>
+    <div style={{ backgroundColor: "#fff", borderRight: "0.2px solid #ece6e6" }}>
       <img
         src={Image}
         alt="Logo"
@@ -47,30 +53,16 @@ const SideBar = () => {
       />
 
       <div style={{ marginTop: 0 }}>
-        {/* Render menu items dynamically */}
+        {/* Render menu items dynamically using Link from React Router */}
         {menuItems.map((menuItem, index) => (
-          <div
+          <Link
             key={index}
+            to={menuItem.path}
             style={{
               ...menuItemStyle,
-              fontWeight: selectedItem === index ? "normal" : "normal",
-              backgroundColor:
-                selectedItem === index ? "#e9f2ff" : "transparent",
-              color: selectedItem === index ? "#0c66e4" : "#44546f",
-            }}
-            onMouseEnter={() => {
-              if (selectedItem !== index) {
-                menuItemStyle.backgroundColor = "#e9f2ff";
-                menuItemStyle.color = "#6777ef";
-                menuItemStyle.fontWeight = "bold";
-              }
-            }}
-            onMouseLeave={() => {
-              if (selectedItem !== index) {
-                menuItemStyle.backgroundColor = "transparent";
-                menuItemStyle.color = "#44546f";
-                menuItemStyle.fontWeight = "normal";
-              }
+              fontWeight: location.pathname === menuItem.path ? "bold" : "normal",
+              backgroundColor: location.pathname === menuItem.path ? "#e9f2ff" : "transparent",
+              color: location.pathname === menuItem.path ? "#0c66e4" : "#44546f",
             }}
             onClick={() => handleItemClick(index)}
           >
@@ -78,14 +70,14 @@ const SideBar = () => {
               style={{
                 marginRight: "10px",
                 fontSize: "20px",
-                color: selectedItem === index ? "#0c66e4" : "#44546f",
+                color: location.pathname === menuItem.path ? "#0c66e4" : "#44546f",
               }}
             />{" "}
             {/* Initial icon color */}
             <div style={{ fontSize: "17px", fontFamily: "DMM" }}>
               {menuItem.text}
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

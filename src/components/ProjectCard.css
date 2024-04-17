@@ -1,0 +1,74 @@
+/* ProjectCard.css */
+.project-card {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc; /* Adjust border color as needed */
+    border-radius: 8px; /* Adjust border radius as needed */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adjust shadow as needed */
+    background-color: #fff; /* Adjust background color as needed */
+}
+
+.progress-bar-container {
+    position: relative;
+    height: 20px;
+    background-color: #E0E0E0;
+    border-radius: 10px; /* Adjust border radius as needed */
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    position: absolute;
+    height: 100%;
+    background-color: #3F51B5; /* Adjust color as needed */
+    border-radius: 10px; /* Adjust border radius as needed */
+}
+
+.progress-percentage {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+}
+
+.project-name {
+    margin: 10px 0;
+    font-size: 1.2em; /* Adjust font size as needed */
+}
+
+.status-button {
+    background-color: #4CAF50; /* Adjust color as needed */
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.status-button.ongoing {
+    background-color: blue; /* Adjust color for ongoing status */
+}
+
+.status-button.completed {
+    background-color: green; /* Adjust color for completed status */
+}
+
+.members {
+    display: flex;
+    align-items: center;
+}
+
+.member {
+    display: inline-block;
+    margin-right: 10px;
+    /* Add more styles for member initials as needed */
+}
+
+.add-member-button {
+    background-color: #eee; /* Adjust color as needed */
+    border: none;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    /* Add more styles for add member button as needed */
+}
