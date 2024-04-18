@@ -62,7 +62,7 @@ export default function Tasks() {
   return (
     <>
       <div>
-        <div
+      <div
           style={{
             display: "flex",
             justifyContent: "space-between",

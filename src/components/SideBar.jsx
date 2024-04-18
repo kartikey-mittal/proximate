@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FiHome, FiInfo, FiPhone,  } from "react-icons/fi"; // Import icons from react-icons
+
 import { FaFolderOpen} from "react-icons/fa6"; // Import icons from react-icons
 import Image from "../assets/fonts/PayFlex.svg";
-
+import { FaCalendar } from "react-icons/fa6";
+import { RiTeamFill } from "react-icons/ri";
+import { PiPhoneCallFill } from "react-icons/pi";
+import { MdSpaceDashboard } from "react-icons/md";
+import { IoWallet } from "react-icons/io5";
 const SideBar = () => {
   // Define an array of menu items with their respective icons and paths
   const menuItems = [
-    { text: "Dashboard", icon: FiHome, path: "/" },
-    { text: "About", icon: FiInfo, path: "/about" },
-    { text: "Connect", icon: FiPhone, path: "/connect" },
+    { text: "Dashboard", icon: MdSpaceDashboard, path: "/" },
+    
+    { text: "Connect", icon: PiPhoneCallFill, path: "/connect" },
     { text: "Projects", icon: FaFolderOpen, path: "/projects" },
+    { text: "Calender", icon: FaCalendar, path: "/cl" },
+    { text: "Team", icon: RiTeamFill, path: "/team" },
+    { text: "Expense", icon: IoWallet, path: "/expense" },
     // Add more menu items as needed
   ];
 
