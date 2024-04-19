@@ -9,6 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import { IoIosAddCircle } from "react-icons/io";
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#6777ef", // Changing header bg color
@@ -30,39 +31,30 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const tasks = [
-  {
-    id: 1,
-    name: "Kartikey Mittal",
-    title: "Task 1",
-    description: "Description for Task 1",
-    status: "Ongoing",
-  },
-  {
-    id: 2,
-    name: "Praveen Tomar",
-    title: "Task 2",
-    description: "Description for Task 2",
-    status: "Completed",
-  },
-  {
-    id: 3,
-    name: "Kaif",
-    title: "Task 3",
-    description: "Description for Task 3",
-    status: "Ongoing",
-  },
-];
-
-export default function Tasks() {
+export default function Tasks({ tasks }) {
   const getStatusColor = (status) => {
-    return status === "Completed" ? "#17c864" : "#d03369";
+    return status === true ? "#17c864" : "#d03369";
+  };
+
+  const getAvatarSrc = (name) => {
+    switch (name) {
+      case "Kartikey":
+        return "https://firebasestorage.googleapis.com/v0/b/snipify-bda1e.appspot.com/o/images%2Fkartik-pic.jpg?alt=media&token=8b9c9a86-5769-4e1f-aa67-3ddceda9d0a4";
+      case "Praveen":
+        return "https://firebasestorage.googleapis.com/v0/b/snipify-bda1e.appspot.com/o/images%2Fpraveen-pic.jpg?alt=media&token=8b9c9a86-5769-4e1f-aa67-3ddceda9d0a4";
+      case "Kaif":
+        return "https://firebasestorage.googleapis.com/v0/b/snipify-bda1e.appspot.com/o/images%2Fkaif-pic.jpg?alt=media&token=8b9c9a86-5769-4e1f-aa67-3ddceda9d0a4";
+      case "Kriti":
+        return "https://firebasestorage.googleapis.com/v0/b/snipify-bda1e.appspot.com/o/images%2Fkriti-pic.jpg?alt=media&token=8b9c9a86-5769-4e1f-aa67-3ddceda9d0a4";
+      default:
+        return "";
+    }
   };
 
   return (
     <>
       <div>
-      <div
+        <div
           style={{
             display: "flex",
             justifyContent: "space-between",
@@ -78,9 +70,7 @@ export default function Tasks() {
               marginLeft: "10px",
               fontFamily: "DMM",
             }}
-          >
-           
-          </div>
+          ></div>
           <div style={{ display: "flex", alignItems: "center" }}>
             <button
               style={{
@@ -97,9 +87,8 @@ export default function Tasks() {
               }}
             >
               Add
-              <IoIosAddCircle  style={{marginLeft:'15px'}}/>
+              <IoIosAddCircle style={{ marginLeft: "15px" }} />
             </button>
-           
           </div>
         </div>
       </div>
@@ -117,16 +106,16 @@ export default function Tasks() {
           <TableBody>
             {tasks.map((task) => (
               <StyledTableRow key={task.id}>
-                <StyledTableCell>{task.name}</StyledTableCell>
+                <StyledTableCell>{task.assigned_name}</StyledTableCell>
                 <StyledTableCell>
                   <Avatar
-                    alt={task.name}
-                    src="https://mui.com/static/images/avatar/1.jpg"
+                    alt={task.assigned}
+                    src={getAvatarSrc(task.assigned_name)}
                     sx={{ width: 24, height: 24 }}
                   />
                 </StyledTableCell>
-                <StyledTableCell>{task.title}</StyledTableCell>
-                <StyledTableCell>{task.description}</StyledTableCell>
+                <StyledTableCell>{task.name}</StyledTableCell>
+                <StyledTableCell>{task.name}</StyledTableCell>
                 <StyledTableCell>
                   <span
                     style={{
@@ -137,7 +126,7 @@ export default function Tasks() {
                       fontSize: "13px",
                     }}
                   >
-                    {task.status}
+                    {task.status ? "Completed" : "Ongoing"}
                   </span>
                 </StyledTableCell>
               </StyledTableRow>

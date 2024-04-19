@@ -2,7 +2,7 @@ import React from 'react';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import Avatar from '@mui/material/Avatar';
 
-const ProjectCard = ({ projectName, progress, memberImages }) => {
+const ProjectCard = ({ projectName, progress, memberImages,onClick  }) => {
     // Set status based on progress
     const status = progress < 100 ? 'Ongoing' : 'Completed';
 
@@ -10,7 +10,7 @@ const ProjectCard = ({ projectName, progress, memberImages }) => {
     const progressBarColor = progress === 100 && status === 'Completed' ? '#4CAF50' : '#3F51B5';
 
     return (
-        <div style={{ width: '380px', padding: '20px', border: '1px solid #ccc', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', backgroundColor: '#fff' }}>
+        <div style={{ width: '380px', padding: '20px', border: '1px solid #ccc', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', backgroundColor: '#fff' ,cursor:'pointer'}} onClick={onClick}>
             <div style={{ position: 'relative', height: '20px', backgroundColor: '#E0E0E0', borderRadius: '10px', marginBottom: '10px' }}>
                 <div style={{ position: 'absolute', height: '100%', width: `${progress}%`, backgroundColor: progressBarColor, borderRadius: '10px' }}></div>
                 <span style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', color: '#fff' }}>{progress}%</span>

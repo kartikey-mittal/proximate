@@ -2,9 +2,17 @@ import React, { useState } from "react";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { storage } from "../../Firebase";
 import { TiUpload } from "react-icons/ti";
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import { AiOutlineDownload } from 'react-icons/ai';
 
-const Attachments = () => {
+const Attachments = ({ attachmentsData }) => {
   const [uploadedFile, setUploadedFile] = useState(null);
+
+  const handleDownload = (url) => {
+    // Open the URL in a new tab
+    window.open(url, "_blank");
+  };
 
   const handleFileUpload = async (e) => {
     try {
@@ -55,9 +63,8 @@ const Attachments = () => {
             fontFamily: "DMM",
           }}
         >
-         
         </div>
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ display: "flex", alignItems: "center", marginBottom: '15px' }}>
           <label htmlFor="fileInput">
             <button
               style={{
@@ -81,28 +88,44 @@ const Attachments = () => {
             id="fileInput"
             type="file"
             style={{
-                display: "flex",
-                alignItems: "center",
-                padding: "5px 10px",
-                backgroundColor: "#7a87c6",
-                color: "#fff",
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer",
-                marginRight: "10px",
-                fontFamily: "DMM",
-              }}
+              display: "flex",
+              alignItems: "center",
+              padding: "5px 10px",
+              backgroundColor: "#7a87c6",
+              color: "#fff",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              marginRight: "10px",
+              fontFamily: "DMM",
+            }}
             onChange={handleFileUpload}
           />
         </div>
       </div>
-      
-      <div>
-        
-      </div>
 
-
-
+      {attachmentsData.map((attachment, index) => (
+        <Paper
+        key={index}
+        elevation={2}
+        style={{
+          width: "70%",
+          alignSelf: "center",
+          marginLeft: "30px",
+          borderRadius: 10,
+          padding: 10,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginTop:10
+        }}
+      >
+        <div style={{ flex: 1, fontFamily: 'DMM' }}>{attachment.name}</div>
+        <button onClick={() => handleDownload(attachment.link)} style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}>
+          <AiOutlineDownload style={{ fontSize: "32px", color: "blue" }} />
+        </button>
+      </Paper>
+      ))}
 
       {uploadedFile && (
         <div style={{ marginTop: "10px" }}>

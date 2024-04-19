@@ -47,11 +47,11 @@ const Card = ({ icon, title, amount, iconBackgroundColor }) => {
   );
 };
 
-const Summary = () => {
+const Summary = ({budget,tasks}) => {
   // Example data array
   const cardsData = [
-    { icon: <FaMoneyBillWave style={{ fontSize: "30px", color: "white" }} />, title: "Budget", amount: "$100", iconBackgroundColor: "#36b399" },
-    { icon: <MdTask style={{ fontSize: "30px", color: "white" }} />, title: "Tasks", amount: "4/7", iconBackgroundColor: "#0086d9" }
+    { icon: <FaMoneyBillWave style={{ fontSize: "30px", color: "white" }} />, title: "Budget", amount: `₹ ${budget}`, iconBackgroundColor: "#36b399" },
+    { icon: <MdTask style={{ fontSize: "30px", color: "white" }} />, title: "Tasks", amount: tasks, iconBackgroundColor: "#0086d9" }
     // Add more data as needed
   ];
 

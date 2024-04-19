@@ -11,8 +11,11 @@ import ProjectDetails from "./pages/ProjectDetails";
 import Connect from "./pages/Connect";
 import VoiceChat from "./pages/VoiceChat";
 import TeamView from "./pages/TeamView";
-import Login from "./pages/Signup";
+import Login from "./pages/Login";
 import Expense from "./pages/Expense";
+import Signup from "./pages/Signup";
+import RegFace from "./pages/RegFace";
+import Room from "./pages/Room";
 const Layout = () => {
   console.log(Router);
   return (
@@ -21,14 +24,17 @@ const Layout = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/connect" element={<Connect />} />
+          <Route path="/room/:roomId" element={<Room />} />
           <Route path="/video" element={<VoiceChat />} />
           <Route path="/team" element={<TeamView />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/regface" element={<RegFace />} />
           <Route path="/test" element={<Test />} />
           <Route path="/c" element={<StackedBarChart />} />
           <Route path="/cl" element={<Calendar />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/d" element={<ProjectDetails />} />
+          <Route path="/project/:projectId" element={<ProjectDetails />} />
           <Route path="/team" element={<Team />} />
           <Route path="/expense" element={<Expense />} />
         </Routes>

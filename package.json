@@ -13,6 +13,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@videosdk.live/react-sdk": "^0.1.86",
+    "@zegocloud/zego-uikit-prebuilt": "^2.0.1",
     "agora-rtc-react": "^2.1.0",
     "chart.js": "^4.4.2",
     "firebase": "^10.11.0",
@@ -28,6 +29,7 @@
     "react-pro-sidebar": "^1.1.0",
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
+    "tw-elements-react": "^1.0.0-alpha2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

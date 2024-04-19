@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import { db } from "../Firebase";
+import { collection, getDocs } from 'firebase/firestore'; // Update the path to your firebase configuration
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -34,22 +36,35 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const BadgeAvatars = () => {
+  const [userAvatars, setUserAvatars] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const usersCollection = collection(db, 'users');
+        const usersSnapshot = await getDocs(usersCollection);
+        const usersData = usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setUserAvatars(usersData);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Stack direction="row" spacing={2}>
-      <StyledBadge
-        overlap="circular"
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        variant="dot"
-      >
-        <Avatar alt="Remy Sharp" src="https://mui.com/static/images/avatar/1.jpg" />
-      </StyledBadge>
-      <StyledBadge
-        overlap="circular"
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        variant=""
-      >
-        <Avatar alt="Remy Sharp" src="https://mui.com/static/images/avatar/2.jpg" />
-      </StyledBadge>
+      {userAvatars.map(user => (
+        <StyledBadge
+          key={user.id}
+          overlap="circular"
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          variant={user.status ? "dot" : ""}
+        >
+          <Avatar alt={user.name} src={user.img} />
+        </StyledBadge>
+      ))}
     </Stack>
   );
 }

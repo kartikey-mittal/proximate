@@ -1,16 +1,55 @@
-import React from "react";
-import ProjectCard from "../components/ProjectCard";
+import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
+import ProjectCard from "../components/ProjectCard";
+import { db } from "../Firebase";
+import { collection, getDocs, query, where, getFirestore, collectionGroup } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 const Projects = () => {
-  const projectName = "Sample Project";
-  const progress = 75;
+  const [projects, setProjects] = useState([]);
+  const navigate = useNavigate(); // Initialize useNavigate hook
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const projectsCollection = collection(db, 'projects');
+        const projectsSnapshot = await getDocs(projectsCollection);
+        const projectsData = [];
 
-  const memberImages = [
-    "https://mui.com/static/images/avatar/1.jpg",
-    "https://mui.com/static/images/avatar/2.jpg",
-    "https://mui.com/static/images/avatar/3.jpg",
-    "https://mui.com/static/images/avatar/4.jpg",
-  ];
+        for (const doc of projectsSnapshot.docs) {
+          const projectData = doc.data();
+          console.log(projectData.name);
+
+          // Fetch tasks from all collections named 'tasks'
+          const tasksCollection = collectionGroup(db, 'tasks');
+          const tasksSnapshot = await getDocs(tasksCollection);
+          const totalTasks = tasksSnapshot.docs.length;
+          const completedTasks = tasksSnapshot.docs.filter(task => task.data().status).length;
+          const progress = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+
+          projectsData.push({
+            id: doc.id,
+            name: projectData.name,
+            progress: progress,
+            memberImages: projectData.members, // Assuming members array consists of email ids
+          });
+
+         
+        }
+
+        setProjects(projectsData);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleProjectClick = (projectId) => {
+    alert(`Clicked project with ID: ${projectId}`);
+    navigate(`/project/${projectId}`); 
+    // You can perform additional actions here, such as navigating to a different page
+  };
+
   return (
     <>
       <div
@@ -23,7 +62,6 @@ const Projects = () => {
       >
         <div style={{ width: "100%", height: "100vh" }}>
           <NavBar />
-
           <div
             style={{
               display: "flex",
@@ -80,31 +118,20 @@ const Projects = () => {
               padding: "20px",
               overflowY: "auto", // Enable vertical scrolling
               maxHeight: "calc(100vh - 64px)", // Adjust to account for NavBar height
-              alignContent:'center',
-              justifyItems:'center'
+              alignContent: "center",
+              justifyItems: "center",
             }}
           >
-            {/* Project Cards */}
-            <ProjectCard
-              projectName={projectName}
-              progress={progress}
-              memberImages={memberImages}
-            />
-            <ProjectCard
-              projectName={projectName}
-              progress={progress}
-              memberImages={memberImages}
-            />
-            <ProjectCard
-              projectName={projectName}
-              progress={progress}
-              memberImages={memberImages}
-            />
-            <ProjectCard
-              projectName={projectName}
-              progress={progress}
-              memberImages={memberImages}
-            />
+            {/* Render Project Cards */}
+            {projects.map((project, index) => (
+              <ProjectCard
+                key={index} // Ensure unique key for each component
+                projectName={project.name}
+                progress={project.progress}
+                memberImages={project.memberImages}
+                onClick={() => handleProjectClick(project.id)}
+              />
+            ))}
           </div>
         </div>
       </div>

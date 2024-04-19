@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { FaFolderOpen} from "react-icons/fa6"; // Import icons from react-icons
-import Image from "../assets/fonts/PayFlex.svg";
+import Image from "../assets/fonts/PROXIMATE.png";
 import { FaCalendar } from "react-icons/fa6";
 import { RiTeamFill } from "react-icons/ri";
 import { PiPhoneCallFill } from "react-icons/pi";
@@ -52,6 +52,7 @@ console.log(selectedItem)
         src={Image}
         alt="Logo"
         style={{
+       
           height: 80,
           display: "block",
           marginLeft: "auto",

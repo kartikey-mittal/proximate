@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import { IoCall } from "react-icons/io5";
+import { db } from "../Firebase";
+import { collection, getDocs } from 'firebase/firestore'; // Update the path to your firebase configuration
 
 const Connect = () => {
-  // Sample data array of persons
-  const persons = [
-    { id: 1, name: "Kartikey", imageUrl: "https://mui.com/static/images/avatar/1.jpg" },
-    { id: 2, name: "Praveen", imageUrl: "https://mui.com/static/images/avatar/2.jpg" },
-    { id: 3, name: "Kaif", imageUrl: "https://mui.com/static/images/avatar/1.jpg" },
-    // Add more persons as needed
-  ];
+  const [persons, setPersons] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const usersCollection = collection(db, 'users');
+        const usersSnapshot = await getDocs(usersCollection);
+        const usersData = usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setPersons(usersData);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleCallClick = (id) => {
     alert(`Calling person with ID ${id}`);
@@ -88,7 +99,7 @@ const Connect = () => {
                   >
                     <Avatar
                       alt={person.name}
-                      src={person.imageUrl}
+                      src={person.img} 
                     />
                     <span
                       style={{
@@ -108,8 +119,7 @@ const Connect = () => {
               ))}
             </div>
             <div style={{ backgroundColor: "#e5e5e5", flexGrow: 1, backgroundImage: "url('https://img.freepik.com/premium-vector/group-people-from-countries-talking-via-videoconference-online-meeting-via-video-conference-vector-illustration-flat-style_612079-359.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1713139200&semt=ais')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
-</div>
-
+            </div>
           </div>
         </div>
       </div>
