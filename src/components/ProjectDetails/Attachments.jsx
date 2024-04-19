@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { storage } from "../../Firebase";
 import { TiUpload } from "react-icons/ti";
-import Box from '@mui/material/Box';
+// import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { AiOutlineDownload } from 'react-icons/ai';
 

@@ -6,7 +6,7 @@ import Messaging from "../components/ProjectDetails/Messaging";
 import Attachments from "../components/ProjectDetails/Attachments";
 import { useParams } from "react-router-dom";
 import { db } from '../Firebase';
-import { doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 
 const ProjectDetails = () => {
   const [activeTab, setActiveTab] = useState("summary");
@@ -17,6 +17,8 @@ const ProjectDetails = () => {
   const [members, setMembers] = useState([]);
   const [tasks, setTasks] = useState([]);
 
+
+  console.log(members)
   useEffect(() => {
     const fetchProjectData = async () => {
       try {
@@ -51,7 +53,7 @@ const ProjectDetails = () => {
     };
 
     fetchProjectData();
-  }, [projectId]);
+  }, [projectId,tasks]);
 
   // Function to extract attachment names from links
   const extractAttachmentName = (link) => {

@@ -138,7 +138,7 @@ const TeamView = () => {
     };
 
     fetchAvatars();
-  }, []);
+  }, [avatars]);
 
   const [duoData, setDuoData] = useState({ duo_first: "", duo_second: "" });
 

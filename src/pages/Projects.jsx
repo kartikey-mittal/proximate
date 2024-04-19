@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import ProjectCard from "../components/ProjectCard";
 import { db } from "../Firebase";
-import { collection, getDocs, query, where, getFirestore, collectionGroup } from 'firebase/firestore';
+import { collection, getDocs,  collectionGroup } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 const Projects = () => {
   const [projects, setProjects] = useState([]);
