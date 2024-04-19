@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Team from "../assets/fonts/ADMIN.svg";
+import Team from "../assets/fonts/ADMIN.png";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
