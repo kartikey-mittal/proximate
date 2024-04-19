@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@coreui/react": "^5.0.0",
     "@mui/material": "^5.15.15",
-    "@testing-library/react": "^13.4.0",
     "@videosdk.live/react-sdk": "^0.1.86",
     "@zegocloud/zego-uikit-prebuilt": "^2.0.1",
     "chart.js": "^4.4.2",
