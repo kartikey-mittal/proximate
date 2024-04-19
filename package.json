@@ -29,7 +29,11 @@
     "react-pro-sidebar": "^1.1.0",
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
+<<<<<<< HEAD
     "tw-elements-react": "^1.0.0-alpha2",
+=======
+    "recharts": "^2.12.5",
+>>>>>>> 0132be44a66a0716a6c1de4c332fbae14761a53c
     "web-vitals": "^2.1.4"
   },
   "scripts": {
