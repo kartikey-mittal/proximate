@@ -54,6 +54,8 @@ const BadgeAvatars = () => {
   }, []);
 
   return (
+    <>
+    
     <Stack direction="row" spacing={2}>
       {userAvatars.map(user => (
         <StyledBadge
@@ -66,12 +68,22 @@ const BadgeAvatars = () => {
         </StyledBadge>
       ))}
     </Stack>
+    </>
   );
 }
+
+
 
 const NavBar = () => {
   return (
     <div style={{ width: '100%', backgroundColor: "#6777ef", display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px' }}>
+      <button className="pl-5 pr-5 pt-2 pb-2" style={{backgroundColor:"#e45fa0",borderRadius:'10px',fontFamily:'DMM'}}>Start
+        </button>
+
+        {/* ----------------- */}
+
+        
+        {/* ----------------- */}
       <div style={{ marginLeft: 'auto', marginRight: '10px',fontFamily:'DMM',color:'white' }}> Members List</div>
       <div style={{ marginRight: '10px' }}>
         <BadgeAvatars />

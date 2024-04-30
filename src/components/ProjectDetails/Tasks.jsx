@@ -9,7 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import { IoIosAddCircle } from "react-icons/io";
-
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#6777ef", // Changing header bg color
@@ -35,7 +35,7 @@ export default function Tasks({ tasks }) {
   const getStatusColor = (status) => {
     return status === true ? "#17c864" : "#d03369";
   };
-
+  const navigate = useNavigate(); // Initialize useNavigate hook
   const getAvatarSrc = (name) => {
     switch (name) {
       case "Kartikey":
@@ -85,6 +85,7 @@ export default function Tasks({ tasks }) {
                 marginRight: "10px",
                 fontFamily: "DMM",
               }}
+              onClick={()=>{navigate('/createTask')}}
             >
               Add
               <IoIosAddCircle style={{ marginLeft: "15px" }} />

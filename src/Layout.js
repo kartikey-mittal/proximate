@@ -16,6 +16,10 @@ import Expense from "./pages/Expense";
 import Signup from "./pages/Signup";
 import RegFace from "./pages/RegFace";
 import Room from "./pages/Room";
+import ChatBot from "./pages/ChatBot";
+import CreateProject from "./pages/CreateProject";
+import AdminHome from "./pages/AdminHome";
+import CreateTask from "./pages/CreateTask";
 const Layout = () => {
   console.log(Router);
   return (
@@ -23,6 +27,10 @@ const Layout = () => {
       
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/create" element={<CreateProject />} />
+          <Route path="/createTask" element={<CreateTask />} />
+          <Route path="/admin" element={<AdminHome />} />
+          <Route path="/bot" element={<ChatBot />} />
           <Route path="/connect" element={<Connect />} />
           <Route path="/room/:roomId" element={<Room />} />
           <Route path="/video" element={<VoiceChat />} />

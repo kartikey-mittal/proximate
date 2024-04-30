@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 import { db } from '../Firebase';
 import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 
+
+
 const ProjectDetails = () => {
   const [activeTab, setActiveTab] = useState("summary");
   const { projectId } = useParams();
@@ -18,42 +20,130 @@ const ProjectDetails = () => {
   const [tasks, setTasks] = useState([]);
 
 
-  console.log(members)
-  useEffect(() => {
-    const fetchProjectData = async () => {
+  
+  // useEffect(() => {
+  //   const fetchProjectData = async () => {
+  //     try {
+  //       const projectRef = doc(db, 'projects', projectId);
+  //       const projectSnapshot = await getDoc(projectRef);
+
+  //       if (projectSnapshot.exists()) {
+  //         const projectData = projectSnapshot.data();
+
+  //         // Set attachments
+  //         setAttachments(projectData.attachments || []);
+
+  //         // Set budget
+  //         setBudget(projectData.budget || 0);
+
+  //         // Set members
+  //         setMembers(projectData.members || []);
+
+  //         // Fetch tasks
+  //         const tasksRef = collection(db, `projects/${projectId}/tasks`);
+  //         const tasksSnapshot = await getDocs(tasksRef);
+  //         const tasksData = tasksSnapshot.docs.map(doc => doc.data());
+  //         setTotalTask(tasksData.length);
+  //         setTasks(tasksData);
+  //         console.log(tasks);
+  //         console.log(members);
+  //       } else {
+  //         console.log('No such project document!');
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching project data:", error);
+  //     }
+  //   };
+
+  //   fetchProjectData();
+  // }, [projectId,tasks]);
+
+
+//   useEffect(() => {
+//     let fetchCount = 0; // Initialize a counter to track the number of times the effect has run
+
+//     const fetchProjectData = async () => {
+//       try {
+//         const projectRef = doc(db, 'projects', projectId);
+//         const projectSnapshot = await getDoc(projectRef);
+
+//         if (projectSnapshot.exists()) {
+//           const projectData = projectSnapshot.data();
+
+//           // Set attachments
+//           setAttachments(projectData.attachments || []);
+
+//           // Set budget
+//           setBudget(projectData.budget || 0);
+
+//           // Set members
+//           setMembers(projectData.members || []);
+
+//           // Fetch tasks only if the effect has not run twice
+//           if (fetchCount < 2) {
+//             const tasksRef = collection(db, `projects/${projectId}/tasks`);
+//             const tasksSnapshot = await getDocs(tasksRef);
+//             const tasksData = tasksSnapshot.docs.map(doc => doc.data());
+//             setTotalTask(tasksData.length);
+//             setTasks(tasksData);
+//             console.log(tasks);
+//             console.log(members);
+//             fetchCount++; // Increment the counter after fetching tasks
+//           }
+//         } else {
+//           console.log('No such project document!');
+//         }
+//       } catch (error) {
+//         console.error("Error fetching project data:", error);
+//       }
+//     };
+
+//     fetchProjectData();
+// }, [projectId]); // Only run the effect when projectId changes
+
+useEffect(() => {
+  let fetchCount = 0; // Initialize a counter to track the number of times the effect has run
+
+  const fetchProjectData = async () => {
       try {
-        const projectRef = doc(db, 'projects', projectId);
-        const projectSnapshot = await getDoc(projectRef);
+          const projectRef = doc(db, 'projects', projectId);
+          const projectSnapshot = await getDoc(projectRef);
 
-        if (projectSnapshot.exists()) {
-          const projectData = projectSnapshot.data();
+          if (projectSnapshot.exists()) {
+              const projectData = projectSnapshot.data();
 
-          // Set attachments
-          setAttachments(projectData.attachments || []);
+              // Set attachments
+              setAttachments(projectData.attachments || []);
 
-          // Set budget
-          setBudget(projectData.budget || 0);
+              // Set budget
+              setBudget(projectData.budget || 0);
 
-          // Set members
-          setMembers(projectData.members || []);
+              // Set members
+              setMembers(projectData.members || []);
 
-          // Fetch tasks
-          const tasksRef = collection(db, `projects/${projectId}/tasks`);
-          const tasksSnapshot = await getDocs(tasksRef);
-          const tasksData = tasksSnapshot.docs.map(doc => doc.data());
-          setTotalTask(tasksData.length);
-          setTasks(tasksData);
-          console.log(tasks);
-        } else {
-          console.log('No such project document!');
-        }
+              // Fetch tasks only if the effect has not run twice
+              if (fetchCount < 2) {
+                  const tasksRef = collection(db, `projects/${projectId}/tasks`);
+                  const tasksSnapshot = await getDocs(tasksRef);
+                  const tasksData = tasksSnapshot.docs.map(doc => doc.data());
+                  setTotalTask(tasksData.length);
+                  setTasks(tasksData);
+                  console.log(tasks);
+                  console.log(members);
+                  fetchCount++; // Increment the counter after fetching tasks
+              }
+          } else {
+              console.log('No such project document!');
+          }
       } catch (error) {
-        console.error("Error fetching project data:", error);
-      }
-    };
+          console.error("Error fetching project data:", error);
+      }    
+  };
 
-    fetchProjectData();
-  }, [projectId,tasks]);
+  fetchProjectData();
+}, [projectId]);
+
+
 
   // Function to extract attachment names from links
   const extractAttachmentName = (link) => {

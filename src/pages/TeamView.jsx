@@ -6,7 +6,7 @@ import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import { useNavigate } from "react-router-dom";
 import { db } from "../Firebase"; // Import the Firebase instance
-import { getDoc, doc, collection, getDocs } from "firebase/firestore";
+import { getDoc, doc, collection, updateDoc,getDocs } from "firebase/firestore";
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
     backgroundColor: "#44b700",
@@ -162,7 +162,11 @@ const TeamView = () => {
     backgroundColor: "transparent",
   };
 
-  const handleDuoClick = () => {
+  const handleDuoClick = async() => {
+    const roomsRef = collection(db, "rooms");
+    const duoDocRef = doc(roomsRef, "duo");
+    await updateDoc(duoDocRef, { duo_first: "https://firebasestorage.googleapis.com/v0/b/proxitest-27233.appspot.com/o/files%2Fkaif.jpg?alt=media&token=eb5f3c6b-65ee-49a3-8a56-9255aa72cc95" });
+    console.log("Duo data updated successfully.");
     navigate("/room/duo");
   };
   const handleQuadClick = () => {

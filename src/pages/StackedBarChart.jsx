@@ -68,9 +68,9 @@ const StackedBarChart = () => {
   return (
     <div style={{ 
         backgroundColor: 'white', 
-        boxShadow: 'inset 0px 0px 5px rgba(0, 0, 0, 0.3)', 
+        boxShadow: "1px 1px 1px 1px rgba(0.5, 0, 0, 0.1)",
         padding: '20px', 
-        borderRadius: '10px',
+        borderRadius: '0px',
         width: '500px',
       }}>
         <canvas ref={chartRef} />

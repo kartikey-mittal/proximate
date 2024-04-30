@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar";
 import ProjectCard from "../components/ProjectCard";
 import { db } from "../Firebase";
 import { collection, getDocs,  collectionGroup } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import {  useNavigate } from 'react-router-dom'; // Import useNavigate hook
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const navigate = useNavigate(); // Initialize useNavigate hook
@@ -50,6 +50,9 @@ const Projects = () => {
     // You can perform additional actions here, such as navigating to a different page
   };
 
+  const handleClick =()=>{
+    navigate('/create'); // Navigate to '/connect'
+  }
   return (
     <>
       <div
@@ -94,6 +97,7 @@ const Projects = () => {
                 marginRight: "20px",
                 fontFamily: "DMM",
               }}
+              onClick={handleClick}
             >
               New Project
               <svg

@@ -49,7 +49,10 @@ function Login() {
           if (userData.password === formData.password) {
             // Password matched
             alert('Email & password successfully verified');
-            navigate('/'); // Navigate to '/connect'
+            localStorage.setItem('email',userData.email );
+          localStorage.setItem('img',userData.img );
+            // navigate('/'); // Navigate to '/connect'
+            window.location.href = "https://face-recog-js.vercel.app/";
           } else {
             // Password does not match
             alert('Incorrect password');

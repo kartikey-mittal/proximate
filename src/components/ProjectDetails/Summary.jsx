@@ -3,6 +3,7 @@ import { FaMoneyBillWave } from "react-icons/fa";
 import DonutChart from "../Donut";
 import { MdTask } from "react-icons/md";
 import Paper from '@mui/material/Paper';
+
 const Card = ({ icon, title, amount, iconBackgroundColor }) => {
   return (
     <Paper elevation={24} style={{
